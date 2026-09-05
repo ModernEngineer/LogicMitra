@@ -1,5 +1,6 @@
 import Container from '../ui/Container';
 import SectionHeading from '../ui/SectionHeading';
+import { StaggerGroup, StaggerItem } from '../motion/Stagger';
 import { processSteps } from '../../data/process';
 
 export default function Process() {
@@ -12,18 +13,18 @@ export default function Process() {
           description="No surprises — you see progress every step of the way, from the first workshop to launch day."
         />
 
-        <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <StaggerGroup className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {processSteps.map((step, i) => (
-            <div key={step.step} className="relative">
+            <StaggerItem key={step.step} className="relative">
               <span className="font-display text-5xl font-bold text-white/10">{step.step}</span>
               <h3 className="mt-3 font-display text-lg font-semibold text-white">{step.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-ink-400">{step.description}</p>
               {i < processSteps.length - 1 && (
                 <div className="absolute right-[-16px] top-6 hidden h-px w-8 bg-gradient-to-r from-brand-500/50 to-transparent lg:block" />
               )}
-            </div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerGroup>
       </Container>
     </section>
   );

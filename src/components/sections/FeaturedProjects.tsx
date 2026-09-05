@@ -2,6 +2,7 @@ import { ArrowUpRight } from 'lucide-react';
 import Container from '../ui/Container';
 import SectionHeading from '../ui/SectionHeading';
 import { LinkButton } from '../ui/Button';
+import { StaggerGroup, StaggerItem } from '../motion/Stagger';
 import { projects } from '../../data/projects';
 
 export default function FeaturedProjects() {
@@ -14,13 +15,16 @@ export default function FeaturedProjects() {
           description="A sample of engagements across web, mobile, cloud and AI — each shipped with the same care as our own product."
         />
 
-        <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <StaggerGroup className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {projects.slice(0, 3).map((project) => (
-            <div
+            <StaggerItem
               key={project.id}
-              className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] transition-all duration-300 hover:border-brand-400/30"
+              whileHover={{ y: -6 }}
+              className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] transition-colors duration-300 hover:border-brand-400/30"
             >
-              <div className={`h-36 bg-gradient-to-br ${project.accent} opacity-80`} />
+              <div className={`h-36 overflow-hidden bg-gradient-to-br ${project.accent} opacity-80`}>
+                <div className="h-full w-full transition-transform duration-500 group-hover:scale-110" />
+              </div>
               <div className="p-6">
                 <span className="text-xs font-semibold uppercase tracking-wider text-brand-400">
                   {project.category}
@@ -35,9 +39,9 @@ export default function FeaturedProjects() {
                   ))}
                 </div>
               </div>
-            </div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerGroup>
 
         <div className="mt-12 flex justify-center">
           <LinkButton to="/portfolio" variant="secondary" size="md">

@@ -3,6 +3,7 @@ import PageHeader from '../components/ui/PageHeader';
 import Container from '../components/ui/Container';
 import SectionHeading from '../components/ui/SectionHeading';
 import { LinkButton } from '../components/ui/Button';
+import { StaggerGroup, StaggerItem } from '../components/motion/Stagger';
 import { jobOpenings, perks } from '../data/careers';
 
 export default function Careers() {
@@ -17,14 +18,18 @@ export default function Careers() {
       <section className="py-24">
         <Container>
           <SectionHeading eyebrow="Life at LogicMitra" title="What you get as part of the team" />
-          <div className="mt-16 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <StaggerGroup className="mt-16 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {perks.map((perk) => (
-              <div key={perk.title} className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+              <StaggerItem
+                key={perk.title}
+                whileHover={{ y: -4 }}
+                className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-colors hover:border-brand-400/20"
+              >
                 <h3 className="font-semibold text-white">{perk.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-ink-400">{perk.description}</p>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerGroup>
         </Container>
       </section>
 
@@ -32,11 +37,12 @@ export default function Careers() {
         <Container className="max-w-3xl">
           <SectionHeading eyebrow="Open roles" title="Current openings" />
 
-          <div className="mt-12 space-y-4">
+          <StaggerGroup className="mt-12 space-y-4">
             {jobOpenings.map((job) => (
-              <div
+              <StaggerItem
                 key={job.id}
-                className="flex flex-col gap-4 rounded-2xl border border-white/10 bg-white/[0.03] p-6 sm:flex-row sm:items-center sm:justify-between"
+                whileHover={{ x: 4 }}
+                className="flex flex-col gap-4 rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-colors hover:border-brand-400/20 sm:flex-row sm:items-center sm:justify-between"
               >
                 <div>
                   <h3 className="font-display text-lg font-semibold text-white">{job.title}</h3>
@@ -56,9 +62,9 @@ export default function Careers() {
                 <LinkButton to="/contact" variant="secondary" size="md" className="shrink-0">
                   Apply now
                 </LinkButton>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerGroup>
         </Container>
       </section>
     </>

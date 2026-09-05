@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-Marketing website for **LogicMitra**, a fictional/sample software engineering company, built as a Vite + React + TypeScript SPA. All company details (contact info, team, testimonials, portfolio, stats) are placeholder content — see the "Before going live" section of [README.md](README.md) for what to replace before deployment.
+Marketing website for **LogicMitra**, an Indian software engineering company (office: Prayagraj), built as a Vite + React + TypeScript SPA. Contact channels (WhatsApp, email, phone, office) are real; team, testimonials, portfolio and stats are still placeholder/sample content — see the "Before going live" section of [README.md](README.md) for what to replace before deployment.
 
 ## Commands
 
@@ -20,7 +20,11 @@ There is no test suite configured. When type-checking a single file, prefer `npx
 
 ## Architecture
 
-**Routing**: `react-router-dom` with a `BrowserRouter` in [src/main.tsx](src/main.tsx). All routes are declared in [src/App.tsx](src/App.tsx) and wrapped in a single `Layout` (Navbar + page content + Footer + BackToTopButton). There is no code-splitting/lazy-loading — every page is a plain top-level import.
+**Routing**: `react-router-dom` with a `BrowserRouter` in [src/main.tsx](src/main.tsx). All routes are declared in [src/App.tsx](src/App.tsx) and wrapped in a single `Layout` (Navbar + page content + Footer + BackToTopButton + WhatsAppButton). There is no code-splitting/lazy-loading — every page is a plain top-level import.
+
+**Hash-anchored navigation**: Footer service links point to `/services#<slug>` (matching the `id={service.slug}` on each service block in [src/pages/Services.tsx](src/pages/Services.tsx)). [ScrollToTop.tsx](src/components/layout/ScrollToTop.tsx) handles both plain route changes (scroll to top) and hash changes (scroll the matching element into view) — don't reintroduce a plain `window.scrollTo(0,0)`-only version or hash deep-links will break. Prefer `Link` from `react-router-dom` over `<a href>` for any in-app navigation (footer/nav), reserving plain `<a>` for `mailto:`, `tel:`, and external links.
+
+**Currency**: this site targets an Indian audience — money amounts (e.g. the contact form's budget dropdown) are in INR (₹, Lakh notation), not USD.
 
 **Page composition pattern**: Each file in `src/pages/` composes reusable section components from `src/components/sections/` in sequence (see [src/pages/Home.tsx](src/pages/Home.tsx) for the clearest example). Sections are self-contained — they pull their own data from `src/data/*.ts` rather than receiving it as props. To change what appears on a page, edit the composition in the page file; to change a section's content, edit its data source or the section component directly.
 
@@ -33,3 +37,12 @@ There is no test suite configured. When type-checking a single file, prefer `npx
 **UI primitives**: `src/components/ui/` holds generic building blocks (`Button`/`LinkButton`, `Container`, `SectionHeading`, `PageHeader`, `Logo`) reused across sections and pages. Prefer composing with these over ad-hoc markup when adding new sections.
 
 **Contact form**: [src/components/sections/ContactForm.tsx](src/components/sections/ContactForm.tsx) does client-side validation and simulates submission with a `setTimeout` — there is no backend wired up. A real submit handler (API route, serverless function, or form service) needs to replace the simulated one before launch.
+
+**Motion/animation**: `framer-motion` is used throughout, not just on the homepage — treat any new page/section as expected to have entrance and interaction animation, consistent with the rest of the site.
+
+- Reusable primitives live in `src/components/motion/`: `Reveal` (scroll-triggered fade-up for a single block — used internally by `SectionHeading`, so most sections get a heading animation for free) and `StaggerGroup`/`StaggerItem` (staggered entrance for grid/list children — pass extra motion props like `whileHover` straight through `StaggerItem`, they're forwarded to the underlying `motion.div`). Shared easing/variants/viewport constants are in [src/lib/motion.ts](src/lib/motion.ts) — reuse `easeOut`/`viewportOnce` rather than inlining new curves.
+- Page transitions are handled once in [src/App.tsx](src/App.tsx) (`AnimatePresence` + `motion.div` keyed on `location.pathname`, wrapping `Routes`) — individual pages don't need their own mount transition.
+- `PageHeader` and `Navbar` animate on mount (not `whileInView`) since they're always above the fold on first paint; everything below the fold uses `whileInView` with `viewport={{ once: true }}` so animations don't replay on scroll-back.
+- The desktop nav active-link indicator and the Portfolio filter pill both use a shared `layoutId` (`motion.span` with `layoutId="nav-active-pill"` / `"portfolio-filter-pill"`) so the highlight slides between items instead of jumping — keep that pattern for any similar tab/pill UI.
+- `Button`/`LinkButton` are `motion.button`/`motion(Link)` with `whileHover`/`whileTap` baked in — new buttons should go through these rather than raw `<button>`/`<Link>` to stay visually consistent.
+- Framer Motion + spreading native HTML props onto a motion component needs the drag/animation event handlers omitted (see `NativeButtonProps` in [src/components/ui/Button.tsx](src/components/ui/Button.tsx)) — copy that `Omit<...>` pattern if you wrap another native element in `motion.*` and spread `...rest` onto it, otherwise `tsc` will fail on conflicting `onDrag*`/`onAnimation*` signatures.

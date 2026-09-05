@@ -1,5 +1,6 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import clsx from 'clsx';
 
 type Variant = 'primary' | 'secondary' | 'ghost';
@@ -11,6 +12,11 @@ interface BaseProps {
   size?: Size;
   className?: string;
 }
+
+type NativeButtonProps = Omit<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  'onDrag' | 'onDragStart' | 'onDragEnd' | 'onAnimationStart' | 'onAnimationEnd' | 'onAnimationIteration'
+>;
 
 const variantClasses: Record<Variant, string> = {
   primary:
@@ -26,7 +32,9 @@ const sizeClasses: Record<Size, string> = {
 };
 
 const baseClasses =
-  'inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-all duration-200 whitespace-nowrap disabled:cursor-not-allowed disabled:opacity-60';
+  'inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-colors duration-200 whitespace-nowrap disabled:cursor-not-allowed disabled:opacity-60';
+
+const MotionLink = motion(Link);
 
 export function Button({
   children,
@@ -34,11 +42,17 @@ export function Button({
   size = 'md',
   className,
   ...rest
-}: BaseProps & ButtonHTMLAttributes<HTMLButtonElement>) {
+}: BaseProps & NativeButtonProps) {
   return (
-    <button className={clsx(baseClasses, variantClasses[variant], sizeClasses[size], className)} {...rest}>
+    <motion.button
+      whileHover={{ scale: 1.04 }}
+      whileTap={{ scale: 0.96 }}
+      transition={{ duration: 0.15 }}
+      className={clsx(baseClasses, variantClasses[variant], sizeClasses[size], className)}
+      {...rest}
+    >
       {children}
-    </button>
+    </motion.button>
   );
 }
 
@@ -50,8 +64,14 @@ export function LinkButton({
   className,
 }: BaseProps & { to: string }) {
   return (
-    <Link to={to} className={clsx(baseClasses, variantClasses[variant], sizeClasses[size], className)}>
+    <MotionLink
+      to={to}
+      whileHover={{ scale: 1.04 }}
+      whileTap={{ scale: 0.96 }}
+      transition={{ duration: 0.15 }}
+      className={clsx(baseClasses, variantClasses[variant], sizeClasses[size], className)}
+    >
       {children}
-    </Link>
+    </MotionLink>
   );
 }

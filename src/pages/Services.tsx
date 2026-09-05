@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { CheckCircle2 } from 'lucide-react';
 import PageHeader from '../components/ui/PageHeader';
 import Container from '../components/ui/Container';
@@ -6,6 +7,7 @@ import FAQ from '../components/sections/FAQ';
 import CTASection from '../components/sections/CTASection';
 import { services } from '../data/services';
 import { iconMap } from '../lib/icons';
+import { easeOut, viewportOnce } from '../lib/motion';
 
 export default function Services() {
   return (
@@ -29,7 +31,12 @@ export default function Services() {
                   reversed ? 'lg:[&>*:first-child]:order-2' : ''
                 }`}
               >
-                <div>
+                <motion.div
+                  initial={{ opacity: 0, x: reversed ? 40 : -40 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={viewportOnce}
+                  transition={{ duration: 0.6, ease: easeOut }}
+                >
                   <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-500/10 text-brand-400">
                     {Icon && <Icon size={26} />}
                   </div>
@@ -38,8 +45,14 @@ export default function Services() {
                   <LinkButton to="/contact" variant="secondary" size="md" className="mt-6">
                     Discuss this service
                   </LinkButton>
-                </div>
-                <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-8">
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, x: reversed ? -40 : 40 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={viewportOnce}
+                  transition={{ duration: 0.6, ease: easeOut, delay: 0.1 }}
+                  className="rounded-2xl border border-white/10 bg-white/[0.03] p-8"
+                >
                   <p className="text-sm font-semibold uppercase tracking-wider text-ink-400">What's included</p>
                   <ul className="mt-4 space-y-3">
                     {service.features.map((feature) => (
@@ -49,7 +62,7 @@ export default function Services() {
                       </li>
                     ))}
                   </ul>
-                </div>
+                </motion.div>
               </div>
             );
           })}

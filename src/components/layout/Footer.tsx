@@ -33,7 +33,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-8">
+          <div className="grid grid-cols-1 gap-10 sm:grid-cols-3 sm:gap-8 lg:col-span-8">
             <div>
               <h4 className="text-sm font-semibold text-white">Company</h4>
               <ul className="mt-4 space-y-3">
@@ -61,9 +61,17 @@ export default function Footer() {
             <div>
               <h4 className="text-sm font-semibold text-white">Contact</h4>
               <ul className="mt-4 space-y-3 text-sm text-ink-400">
-                <li>hello@logicmitra.com</li>
-                <li>+91 95540 58799 </li>
-                <li> India</li>
+                <li>
+                  <a href="mailto:hello@logicmitra.com" className="hover:text-white">
+                    hello@logicmitra.com
+                  </a>
+                </li>
+                <li>
+                  <a href="tel:+919554058799" className="hover:text-white">
+                    +91 95540 58799
+                  </a>
+                </li>
+                <li>Prayagraj, India</li>
               </ul>
             </div>
           </div>
