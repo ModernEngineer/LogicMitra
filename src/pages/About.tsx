@@ -2,6 +2,8 @@ import { Target, Eye, HeartHandshake } from 'lucide-react';
 import PageHeader from '../components/ui/PageHeader';
 import Container from '../components/ui/Container';
 import SectionHeading from '../components/ui/SectionHeading';
+import Reveal from '../components/motion/Reveal';
+import { StaggerGroup, StaggerItem } from '../components/motion/Stagger';
 import Stats from '../components/sections/Stats';
 import TeamGrid from '../components/sections/TeamGrid';
 import CTASection from '../components/sections/CTASection';
@@ -36,7 +38,7 @@ export default function About() {
       <section className="py-24">
         <Container className="max-w-3xl">
           <SectionHeading eyebrow="Our story" title="From a two-person team to a full-stack studio" align="left" />
-          <div className="mt-6 space-y-4 text-base leading-relaxed text-ink-300">
+          <Reveal delay={0.1} className="mt-6 space-y-4 text-base leading-relaxed text-ink-300">
             <p>
               LogicMitra started with a simple observation: most software studios were either too slow and process-heavy,
               or too informal to trust with a serious product. We set out to build something in between — a senior,
@@ -47,23 +49,27 @@ export default function About() {
               that run their business — bringing the same discipline to a two-week prototype as we do to a
               year-long platform build.
             </p>
-          </div>
+          </Reveal>
         </Container>
       </section>
 
       <section className="border-y border-white/5 bg-ink-900/40 py-24">
         <Container>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+          <StaggerGroup className="grid grid-cols-1 gap-6 sm:grid-cols-3">
             {values.map((value) => (
-              <div key={value.title} className="rounded-2xl border border-white/10 bg-white/[0.03] p-8 text-center">
+              <StaggerItem
+                key={value.title}
+                whileHover={{ y: -4 }}
+                className="rounded-2xl border border-white/10 bg-white/[0.03] p-8 text-center transition-colors hover:border-brand-400/20"
+              >
                 <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-brand-500/10 text-brand-400">
                   <value.icon size={22} />
                 </div>
                 <h3 className="mt-4 font-display text-lg font-semibold text-white">{value.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-ink-400">{value.description}</p>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerGroup>
         </Container>
       </section>
 

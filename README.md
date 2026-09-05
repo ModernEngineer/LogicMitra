@@ -30,13 +30,20 @@ npm run lint      # run oxlint
 - [Framer Motion](https://www.framer.com/motion/) for entrance animations
 - [Lucide](https://lucide.dev/) for icons
 
+## Contact channels
+
+- **WhatsApp** — a floating "click to chat" button ([WhatsAppButton.tsx](src/components/layout/WhatsAppButton.tsx)) opens a chat to `+91 95540 58799` with a pre-filled message. Update `WHATSAPP_NUMBER` there if the number changes.
+- **Email / phone** — clickable `mailto:`/`tel:` links in the footer and on `/contact`, currently `hello@logicmitra.com` and `+91 95540 58799`.
+- **Office** — Prayagraj, India.
+- **Budget ranges** on the contact form are in INR (₹ Lakh).
+
 ## Before going live
 
-All company details are placeholder content and should be replaced:
+Some content is still sample/placeholder and should be replaced:
 
-- **Contact info** — email, phone and address in [src/data/nav.ts](src/data/nav.ts), [Footer.tsx](src/components/layout/Footer.tsx) and [Contact.tsx](src/pages/Contact.tsx)
 - **Team, testimonials, portfolio, stats** — sample data in `src/data/*.ts`, clearly marked with comments
 - **Contact form** — currently simulates a submission client-side only; wire it up to a real backend or form service (see the comment in [ContactForm.tsx](src/components/sections/ContactForm.tsx))
-- **Social links** — placeholder `#` links in the footer
+- **Social links** — placeholder `#` links in the footer (Twitter/LinkedIn/GitHub-style icons)
+- **Email address** — `hello@logicmitra.com` assumes that domain is registered; update if not
 
 See [CLAUDE.md](CLAUDE.md) for a fuller architecture overview.

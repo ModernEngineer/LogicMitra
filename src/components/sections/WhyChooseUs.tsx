@@ -1,6 +1,7 @@
 import { Rocket, Users, Lock, LineChart } from 'lucide-react';
 import Container from '../ui/Container';
 import SectionHeading from '../ui/SectionHeading';
+import { StaggerGroup, StaggerItem } from '../motion/Stagger';
 
 const points = [
   {
@@ -39,17 +40,21 @@ export default function WhyChooseUs() {
             />
           </div>
 
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+          <StaggerGroup className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             {points.map((point) => (
-              <div key={point.title} className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+              <StaggerItem
+                key={point.title}
+                whileHover={{ y: -4 }}
+                className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-colors hover:border-brand-400/20"
+              >
                 <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-500/10 text-brand-400">
                   <point.icon size={20} />
                 </div>
                 <h3 className="mt-4 font-semibold text-white">{point.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-ink-400">{point.description}</p>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerGroup>
         </div>
       </Container>
     </section>
