@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Code2, Link2, Mail, MessageCircle } from 'lucide-react';
 import Container from '../ui/Container';
 import Logo from '../ui/Logo';
@@ -38,9 +39,9 @@ export default function Footer() {
               <ul className="mt-4 space-y-3">
                 {navLinks.map((link) => (
                   <li key={link.path}>
-                    <a href={link.path} className="text-sm text-ink-400 hover:text-white">
+                    <Link to={link.path} className="text-sm text-ink-400 hover:text-white">
                       {link.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -50,9 +51,9 @@ export default function Footer() {
               <ul className="mt-4 space-y-3">
                 {services.slice(0, 5).map((s) => (
                   <li key={s.slug}>
-                    <a href="/services" className="text-sm text-ink-400 hover:text-white">
+                    <Link to={`/services#${s.slug}`} className="text-sm text-ink-400 hover:text-white">
                       {s.title}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
