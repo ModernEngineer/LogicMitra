@@ -1,4 +1,5 @@
 import type { Project } from '../types';
+import hospitalImage from '../images/Hopital.png';
 
 // Sample portfolio entries — replace with real case studies before launch.
 export const projects: Project[] = [
@@ -19,12 +20,14 @@ export const projects: Project[] = [
     accent: 'from-emerald-500 to-teal-500',
   },
   {
-    id: 'shopcart',
-    title: 'ShopCart — Headless Commerce Storefront',
-    category: 'E-commerce',
-    description: 'A headless storefront with sub-second page loads and a modular checkout built for high-traffic sales events.',
-    tags: ['Next.js', 'Stripe', 'Redis'],
+    id: 'hospital',
+    title: 'Hospital — Healthcare Management Platform',
+    category: 'Web App',
+    description: 'A modern hospital website for exploring healthcare services, departments, doctors, appointments and patient support in one accessible digital experience.',
+    tags: ['React', 'Healthcare', 'Appointments'],
     accent: 'from-fuchsia-500 to-pink-500',
+    image: hospitalImage,
+    url: 'https://hospital-iota-sable.vercel.app/',
   },
   {
     id: 'opsight',
