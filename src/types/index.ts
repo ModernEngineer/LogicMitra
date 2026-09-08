@@ -14,6 +14,8 @@ export interface Project {
   description: string;
   tags: string[];
   accent: string;
+  image?: string;
+  url?: string;
 }
 
 export interface Testimonial {
