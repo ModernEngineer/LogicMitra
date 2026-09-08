@@ -1,23 +1,40 @@
 import type { Project } from '../types';
 import hospitalImage from '../images/Hopital.png';
+import gymImage from '../images/image.png';
+import billingImage from '../images/image copy.png';
+import restaurantImage from '../images/image copy 2.png';
 
 // Sample portfolio entries — replace with real case studies before launch.
 export const projects: Project[] = [
   {
-    id: 'fintrack',
-    title: 'FinTrack — Expense Analytics Platform',
+    id: 'ironpulse',
+    title: 'IronPulse — Strength Studio',
     category: 'Web App',
-    description: 'A multi-tenant analytics dashboard for finance teams to track spend across departments in real time.',
-    tags: ['React', 'Node.js', 'PostgreSQL'],
+    description: 'A bold fitness studio website for memberships, coaching, training plans and gym community engagement.',
+    tags: ['React', 'Fitness', 'Responsive UI'],
     accent: 'from-indigo-500 to-blue-500',
+    image: gymImage,
+    url: 'https://gym-wwyd.vercel.app/',
   },
   {
-    id: 'medqueue',
-    title: 'MedQueue — Clinic Appointment System',
-    category: 'Mobile App',
-    description: 'A patient-facing booking app with real-time queue tracking, cutting average clinic wait time significantly.',
-    tags: ['React Native', 'Firebase'],
+    id: 'billing-erp',
+    title: 'Billing ERP — Business Management Platform',
+    category: 'Web App',
+    description: 'A modern billing platform for managing invoices, inventory, sales, payments and business operations.',
+    tags: ['React', 'ERP', 'Billing'],
     accent: 'from-emerald-500 to-teal-500',
+    image: billingImage,
+    url: 'https://billing-software-livid-omega.vercel.app/',
+  },
+  {
+    id: 'saffron-ember',
+    title: 'Saffron & Ember — Fine Indian Dining',
+    category: 'Web App',
+    description: 'An atmospheric restaurant website for showcasing the menu, story, gallery and table reservations.',
+    tags: ['React', 'Restaurant', 'Reservations'],
+    accent: 'from-amber-500 to-orange-500',
+    image: restaurantImage,
+    url: 'https://restorent-ruddy.vercel.app/',
   },
   {
     id: 'hospital',
