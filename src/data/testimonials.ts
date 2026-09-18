@@ -8,7 +8,7 @@ export const testimonials: Testimonial[] = [
     role: 'Founder & CEO',
     company: 'FinTrack',
     quote:
-      'LogicMitra rebuilt our analytics platform from the ground up. The team communicated clearly at every stage and shipped ahead of schedule.',
+      'NexGenCode.in rebuilt our analytics platform from the ground up. The team communicated clearly at every stage and shipped ahead of schedule.',
     initials: 'AK',
   },
   {
@@ -35,7 +35,7 @@ export const testimonials: Testimonial[] = [
     role: 'CTO',
     company: 'OpSight',
     quote:
-      'LogicMitra\'s DevOps team untangled years of infrastructure debt and gave us a monitoring stack we finally trust.',
+      'NexGenCode.in\'s DevOps team untangled years of infrastructure debt and gave us a monitoring stack we finally trust.',
     initials: 'VS',
   },
 ];

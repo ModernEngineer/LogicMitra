@@ -8,6 +8,7 @@ import Logo from '../ui/Logo';
 import { LinkButton } from '../ui/Button';
 import { navLinks } from '../../data/nav';
 
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(() => window.scrollY > 8);
   const [open, setOpen] = useState(false);
@@ -34,7 +35,7 @@ export default function Navbar() {
       )}
     >
       <Container className="flex h-20 items-center justify-between py-4">
-        <Logo />
+        <Logo className="relative -left-[10%]" />
 
         <nav className="hidden items-center gap-1 lg:flex">
           {navLinks.map((link) => (
@@ -65,7 +66,7 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <div className="hidden lg:block">
+        <div className="relative left-[1%] hidden lg:block">
           <LinkButton to="/contact" size="md">
             Start a Project
           </LinkButton>
