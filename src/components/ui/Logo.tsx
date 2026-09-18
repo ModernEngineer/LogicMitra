@@ -1,14 +1,23 @@
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import logoImage from '../../assest/nexgencodelogo.png';
 
 export default function Logo({ className }: { className?: string }) {
   return (
-    <Link to="/" className={`flex items-center gap-2.5 ${className ?? ''}`}>
-      <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 font-display text-sm font-bold text-white shadow-lg shadow-brand-600/30">
-        LM
-      </span>
-      <span className="font-display text-lg font-bold tracking-tight text-white">
-        Logic<span className="text-brand-400">Mitra.In</span>
-      </span>
+    <Link
+      to="/"
+      aria-label="NextGenCode home"
+      className={`group flex items-center ${className ?? ''}`}
+    >
+      <motion.img
+        src={logoImage}
+        alt="NextGenCode"
+        initial={{ opacity: 0, scale: 0.9, y: -6 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ type: 'spring', stiffness: 240, damping: 18 }}
+        whileHover={{ scale: 1.04 }}
+        className="h-28 w-96 object-contain transition-[filter] duration-300 group-hover:brightness-125 sm:h-32 sm:w-[32rem]"
+      />
     </Link>
   );
 }

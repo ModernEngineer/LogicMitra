@@ -40,7 +40,7 @@ export default function Hero() {
 
           <StaggerItem className="mt-6">
             <p className="max-w-xl text-lg leading-relaxed text-ink-300">
-              LogicMitra designs and builds web, mobile, cloud and AI-powered products for startups and enterprises —
+              NexGenCode.in designs and builds web, mobile, cloud and AI-powered products for startups and enterprises —
               from first prototype to production scale.
             </p>
           </StaggerItem>
